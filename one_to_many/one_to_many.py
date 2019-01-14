@@ -1,3 +1,4 @@
+import numpy
 import pandas as pd
 import os #用到的一个新库
 import re
@@ -29,7 +30,8 @@ def urlfmt(url):
     
 
 def oneEtoMe(url="./data.xlsx",group='村居',n=0):
-    '''url：excel的路径；n：excel文件中列名的行号，第一行：0，第二行：1，默认为第一行；group：依据分组的列名，默认为村居,
+    '''将一个文件拆分成多个XLSX文件；
+    url：excel的路径；n：excel文件中列名的行号，第一行：0，第二行：1，默认为第一行；group：依据分组的列名，默认为村居,
     请将要拆分的表放在首页！'''
     #url=urlfmt(url)
     data=pd.read_excel(url,header = n)
@@ -45,10 +47,10 @@ def oneEtoMe(url="./data.xlsx",group='村居',n=0):
 
 
 
-def Metoone(url):
-    '''op:文件夹路径，拖入窗体即可'''
-    #op=urlfmt(op)
-    url=url+'\\' 
+def Metoone(url='./files/' ):
+    '''将多个xlsx文件合并成一个  2  
+    op:文件夹路径，拖入窗体即可'''
+    #op=urlfmt(op)    
     name_list=os.listdir(op) #用os库获取该文件夹下的文件名称
     data=[] 
     for x in range(len(name_list)):
@@ -60,6 +62,7 @@ def Metoone(url):
 
 
 def Ms_to_ones(url):
+    '''将多个工作表合并成一个工作表'''
     #url=urlfmt(url)
     zx=pd.ExcelFile(url)#获取工作簿里面的属性
     data=zx.parse(zx.sheet_names) #调用属性中的所有sheet名称并将数传入变量data
@@ -68,6 +71,7 @@ def Ms_to_ones(url):
 
 
 def oneE_to_Ms(url,group='村居',n=0):
+    '''一个xlsx拆分成多个工作表'''
     #url=urlfmt(url)
     data=pd.read_excel(url,header = n)#导入数据
     
@@ -93,21 +97,21 @@ while b:
     请输入（1/2/3/4/q）：
     ''')
     if innum == "1":
-        geturl()
+        #geturl()
         group=input("请输入分组依据（列名）")
         n = int(input("请输入列名的行号，在第一行为0，第二行为1，以此类推"))
         oneEtoMe(url,group,n)
         print("转换完成")
     elif innum == "2":
-        geturl-()    
+        #geturl-()    
         Metoone(url,group,n)
         print("转换完成")
     elif innum == "3":
-        geturl()      
-        Ms_to_ones(url,group,n)
+        #geturl()      
+        Ms_to_ones(url)
         print("转换完成")
     elif innum == '4':
-        geturl()
+        #geturl()
         group=input("请输入分组依据（列名）")
         n = int(input("请输入列名的行号，在第一行为0，第二行为1，以此类推"))
         oneE_to_Ms(url,group,n)
