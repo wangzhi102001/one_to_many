@@ -99,7 +99,7 @@ while b:
         oneEtoMe(url,group,n)
         print("转换完成")
     elif innum == "2":
-        geturl()    
+        geturl-()    
         Metoone(url,group,n)
         print("转换完成")
     elif innum == "3":
